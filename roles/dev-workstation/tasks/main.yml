@@ -48,6 +48,23 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
+- name: creating picom config directory
+  become: yes
+  file:
+    path: "/home/{{ username }}/.config/picom"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+    state: directory
+  
+- name: copy picom config
+  become: yes
+  copy:
+    src: config/picom/picom.conf
+    dest: "/home/{{ username }}/.config/picom/picom.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+ 
 - name: copy powerlevel10k configuration
   become: yes
   copy:
