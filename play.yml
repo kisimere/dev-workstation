@@ -1,0 +1,16 @@
+---
+- hosts: all
+  user: root
+  vars_files: vars.yml
+  roles:
+    - mgm
+
+
+- hosts: workstation
+  user: ansible
+  vars_files: vars.yml
+  roles:
+    - system_update
+    - dev-workstation
+    - suckless
+    - neovim

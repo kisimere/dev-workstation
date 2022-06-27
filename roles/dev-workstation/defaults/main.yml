@@ -1,0 +1,86 @@
+---
+services_package:
+  - elogind
+  - eudev
+  - dbus-elogind-x11
+  - dbus-elogind-libs
+  - dbus
+
+media_package:
+  - mpv
+  - ffmpeg
+
+dev_package:
+  - git
+  - nodejs
+  - python3
+  - python3-devel
+  - python3-pip
+
+tools_package:
+  - awk
+  - wget
+  - rsync
+  - aria2
+  - ImageMagick
+  - neofetch
+  - picom
+  - w3m-img
+  - feh
+  - xdotool
+  - zsh
+  - gnupg
+
+void_package:
+  - xtools
+  - base-devel
+  - fontconfig-devel
+  - void-repo-nonfree
+  - libX11-devel
+  - libXft-devel
+  - libXinerama-devel
+  - freetype-devel
+
+video_package:
+  - xorg-minimal
+  - xorg-fonts
+  - xrandr
+  - xf86-video-fbdev
+
+macbook_package:
+  - brightnessctl
+  - linux-firmware-intel
+  - intel-video-accel
+  - xf86-video-intel
+  - mesa-intel-dri
+  - mesa-dri
+
+audio_package:
+  - pipewire
+  - alsa-utils
+  - pulsemixer
+
+
+internet_package:
+  - qutebrowser
+  - python3-adblock
+
+locals_and_font_package:
+  - noto-fonts-cjk
+  - nerd-fonts-ttf
+  - terminus-font
+
+
+pip_package:
+  - passlib
+
+npm_package:
+  - "@bitwarden/cli"
+
+yubikey_package:
+  - gnupg2-scdaemon
+  - dbus
+  - eudev
+  - elogind
+  - u2f-hidraw-policy
+  - ykpers

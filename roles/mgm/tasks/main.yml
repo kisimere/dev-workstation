@@ -1,0 +1,22 @@
+---
+- name: adding managment user
+  user:
+    name: ansible
+    state: present
+    shell: /bin/bash
+    groups: wheel
+    append: yes
+    create_home: yes
+    skeleton: /etc/skel
+
+- name: enabling rootless sudo for mgm user
+  copy:
+    src: ansible
+    dest: /etc/sudoers.d/ansible
+
+- name: adding public management key
+  authorized_key:
+    comment: ansible_user
+    user: ansible
+    state: present
+    key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"

@@ -1,0 +1,5 @@
+---
+# defaults file for neovim
+nvim_package:
+  - neovim
+  - git

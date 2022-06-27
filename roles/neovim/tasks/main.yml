@@ -1,0 +1,39 @@
+---
+- name: making sure that {{ nvim_package }} is installed
+  become: yes
+  xbps:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ nvim_package }}"
+
+- name: creating neovim directories
+  become: yes
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+    state: directory
+  with_items:
+    - "/.config/nvim"
+    - "/.local/share/nvim/site/autoload"
+
+- name: downloading vimplug
+  become: yes
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "/home/{{ username }}/.local/share/nvim/site/autoload/plug.vim"
+    owner: "{{ username }}"
+    mode: 0755
+
+- name: copy vim settings
+  become: yes
+  copy:
+    src: init.vim
+    dest: "/home/{{ username }}/.config/nvim/init.vim"
+    owner: "{{ username }}"
+    mode: 0644
+
+- name: installing neovim plugins
+  raw: sudo -u "{{ username }}" nvim --headless +PlugInstall +qall

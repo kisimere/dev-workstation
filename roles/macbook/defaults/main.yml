@@ -1,0 +1,9 @@
+---
+# defaults file for macbook
+mac_package:
+  - terminus-font
+  - brightnessctl
+  - linux-firmware-intel
+  - intel-video-accel
+  - vulkan-loader
+  - mesa-vulkan-intel

@@ -1,0 +1,8 @@
+#! /bin/sh
+pipewire-pulse &
+pipewire &
+slstatus &
+picom -b &
+feh --bg-fill ~/wallpaper.png &
+xrandr -s 1680x1050
+exec dbus-launch --exit-with-session dwm

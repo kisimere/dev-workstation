@@ -1,0 +1,8 @@
+---
+# tasks file for system_update
+
+- name: updating cache and upgrading system
+  become: yes
+  xbps:
+    update_cache: yes
+    upgrade: yes

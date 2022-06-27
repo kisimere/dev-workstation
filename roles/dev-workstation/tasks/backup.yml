@@ -1,0 +1,51 @@
+---
+- name: ensuring the  base packages for dev-workstation are installed
+  become: yes
+  xbps:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ media_package }}"
+    - "{{ dev_package }}"
+    - "{{ tools_package }}"
+    - "{{ void_package }}"
+    - "{{ video_package }}"
+    - "{{ audio_package }}"
+    - "{{ internet_package }}"
+    - "{{ locals_and_font_package }}"
+    - "{{ yubikey_package }}"
+
+- name: installing node packages
+  become: yes
+  npm:
+    name: "{{ item }}"
+    global: yes
+    state: present
+  loop: "{{npm_package}}"
+      
+
+- name: Installing macbook specific packages
+  become: yes
+  xbps:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ macbook_package }}"
+
+- name: creating user {{ username }} 
+  become: yes
+  user:
+    name: "{{ item }}"
+    password: "{{ password_username | password_hash('sha512') }}"
+    update_password: on_create
+    create_home: yes
+    system: yes
+    shell: /bin/bash
+    skeleton: /etc/skel
+    state: present
+  with_items: "{{ username }}"
+
+- name: enabling sudo for {{ username }}
+  become: yes
+  template:
+    src: user_list.j2
+    dest: "/etc/sudoers.d/{{ username }}"

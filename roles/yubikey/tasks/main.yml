@@ -1,0 +1,26 @@
+---
+- name: ensure gnupg and scdaemon are installed
+  become: yes
+  xbps:
+    name:
+      - gnupg
+      - gnupg2-scdaemon
+    state: present
+
+- name: ensure dbus eudev elogind are installed
+  become: yes
+  xbps:
+    name:
+      - dbus
+      - eudev
+      - elogind
+    state: present
+
+- name: installing yubikey toosl
+  become: yes
+  xbps:
+    name:
+      - u2f-hidraw-policy
+      - ykpers
+    state: present
+

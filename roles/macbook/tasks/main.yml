@@ -1,0 +1,19 @@
+---
+# tasks file for macbook
+- name: ensuring that the drivers and tools for my macbook are installed
+  xbps:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ mac_package }}"
+
+- name: fixing some annoyances
+  become: yes
+  blockinfile:
+    dest: /etc/rc.conf
+    content: |
+             FONT="ter-132n"
+             modprobe -r usbmouse
+             modprobe -r bcm5974
+             modprobe bcm5974
+

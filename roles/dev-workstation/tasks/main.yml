@@ -1,0 +1,100 @@
+---
+- name: ensuring the  base packages for dev-workstation are installed
+  become: yes
+  xbps:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ void_package }}"
+    - "{{ video_package }}"
+    - "{{ audio_package }}"
+    - "{{ tools_package }}"
+    - "{{ services_package }}"
+    - "{{ locals_and_font_package }}"
+    - "{{ media_package }}"
+    - "{{ dev_package }}"
+
+- name: creating user {{ username }} 
+  become: yes
+  user:
+    name: "{{ username }}"
+    password: "{{ password_username | password_hash('sha512') }}"
+    update_password: on_create
+    create_home: yes
+    system: yes
+    shell: /bin/zsh
+    skeleton: /etc/skel
+    state: present 
+
+- name: enabling sudo for {{ username }}
+  become: yes
+  template:
+    src: username.j2
+    dest: "/etc/sudoers.d/{{ username }}"
+
+- name: downloading antigen {{ username }}
+  become: yes
+  get_url:
+    url: https://git.io/antigen
+    dest: "/home/{{ username }}/.antigen.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: copy zsh configuration
+  become: yes
+  copy:
+    src: zshrc
+    dest: "/home/{{ username }}/.zshrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: copy powerlevel10k configuration
+  become: yes
+  copy:
+    src: p10k.zsh
+    dest: "/home/{{ username }}/.p10k.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: setting up xinitrc
+  become: yes
+  copy:
+    src: xinitrc
+    dest: "/home/{{ username }}/.xinitrc"
+    owner: "{{ username }}"
+    mode: 0664
+
+- name: setting up xdefaults
+  become: yes
+  copy:
+    src: Xdefaults
+    owner: "{{ username }}"
+    dest: "/home/{{ username }}/.Xdefaults"
+    mode: 0644
+
+- name: setting up xressources
+  become: yes
+  copy:
+    src: Xdefaults
+    dest: "/home/{{ username }}/.Xressources"
+    owner: "{{ username }}"
+    mode: 0644
+
+- name: enable dbus service
+  become: yes
+  service:
+    name: dbus
+    enabled: yes
+
+- name: enable eudev service
+  become: yes
+  service:
+    name: udevd
+    enabled: yes
+
+- name: enable elogind service
+  become: yes
+  service:
+    name: elogind
+    enabled: yes
+

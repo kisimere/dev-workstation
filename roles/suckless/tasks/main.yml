@@ -1,0 +1,60 @@
+---
+- name: ensuring dependencies for suckless tools are installed
+  xbps:
+    name:
+      - base-devel
+      - libX11-devel
+      - libXft-devel
+      - libXinerama-devel
+      - freetype-devel
+      - fontconfig-devel
+    state: present
+
+- name: cloning suckless repo from kisimere/suckless-builds
+  git:
+    repo: https://github.com/kisimere/suckless-builds
+    dest: /home/ansible/github/suckless-builds
+
+- name: removing config.h from st
+  file:
+    path: /home/ansible/github/suckless-builds/st/config.h
+    state: absent
+
+- name: make st
+  become: yes
+  make:
+    chdir: /home/ansible/github/suckless-builds/st
+    target: install
+
+- name: removing config.h from dwm
+  file:
+    path: /home/ansible/github/suckless-builds/dwm/config.h
+    state: absent
+
+- name: make dwm
+  become: yes
+  make:
+    chdir: /home/ansible/github/suckless-builds/dwm
+    target: install
+
+- name: removing config.h from slstatus
+  file:
+    path: /home/ansible/github/suckless-builds/slstatus/config.h
+    state: absent
+
+- name: make slstatus
+  become: yes
+  make:
+    chdir: /home/ansible/github/suckless-builds/slstatus
+    target: install
+
+- name: removing config.h from dmenu
+  file:
+    path: /home/ansible/github/suckless-builds/dmenu/config.h
+    state: absent
+
+- name: make dmenu
+  become: yes
+  make:
+    chdir: /home/ansible/github/suckless-builds/dmenu
+    target: install

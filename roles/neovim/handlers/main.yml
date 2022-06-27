@@ -1,0 +1,6 @@
+---
+- name: installing neovim plugins
+  become: yes
+  become_user: "{{ username }}"
+  command:
+    cmd: "nvim --headless +PlugInstall +qall"
