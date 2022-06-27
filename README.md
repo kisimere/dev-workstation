@@ -17,6 +17,7 @@ ansible-playbook --ask-vault-pass -i < invetory file > play.yml
 # TODO
 - [ ] role mgm (add managment user and disable root login )
 - [x] create a dev-workstaton role
+- [ ] add wallpaper
 - [ ] fix picom (mesa,glx) 
 - [x] role update system 
 - [x] role suckless
