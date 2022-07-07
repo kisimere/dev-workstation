@@ -13,6 +13,15 @@
     - "{{ locals_and_font_package }}"
     - "{{ media_package }}"
     - "{{ dev_package }}"
+    - "{{ macbook_package }}"
+    - "{{ internet_package }}"
+
+- name: ensuring node packages are installed 
+  npm:
+    name: "{{ item }}"
+    global: yes
+  loop: "{{ npm_package }}"
+
 
 - name: creating user {{ username }} 
   become: yes

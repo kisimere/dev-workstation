@@ -54,6 +54,7 @@ macbook_package:
   - xf86-video-intel
   - mesa-intel-dri
   - mesa-dri
+  - acpi
 
 audio_package:
   - pipewire
@@ -64,6 +65,8 @@ audio_package:
 internet_package:
   - qutebrowser
   - python3-adblock
+  - neomutt
+  - yt-dlp
 
 locals_and_font_package:
   - noto-fonts-cjk

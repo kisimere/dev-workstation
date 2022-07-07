@@ -12,5 +12,7 @@
   roles:
     - system_update
     - dev-workstation
+    - macbook
     - suckless
     - neovim
+    - yubikey
