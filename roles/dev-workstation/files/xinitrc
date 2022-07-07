@@ -3,6 +3,6 @@ pipewire-pulse &
 pipewire &
 slstatus &
 picom -b &
-feh --bg-fill ~/wallpaper.png &
+feh --bg-fill ~/wallpaper/bg.jpg &
 xrandr -s 1680x1050
 exec dbus-launch --exit-with-session dwm
