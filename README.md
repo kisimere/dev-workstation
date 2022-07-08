@@ -4,21 +4,18 @@
 - vars.yml
     - username
     - password_username
+    - username_git
+    - mail_git
 - pubkey under ~/.ssh/ansible.pub
 - inventory file
 
 ```
 ansible-playbook -i < inventory file > play.yml 
 ```
-or with an vault
-```
-ansible-playbook --ask-vault-pass -i < invetory file > play.yml
-```
 # TODO
 - [ ] role mgm (add managment user and disable root login )
 - [x] create a dev-workstaton role
 - [ ] add wallpaper
-- [ ] fix picom (mesa,glx) 
 - [x] role update system 
 - [x] role suckless
 - [x] role neovim

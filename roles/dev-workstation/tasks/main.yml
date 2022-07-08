@@ -22,7 +22,6 @@
     global: yes
   loop: "{{ npm_package }}"
 
-
 - name: creating user {{ username }} 
   become: yes
   user:
@@ -34,6 +33,14 @@
     shell: /bin/zsh
     skeleton: /etc/skel
     state: present 
+
+- name: adding gitconfig
+  become: yes
+  template:
+    src: gitconfig.j2
+    dest: "/home/{{ username }}/.gitconfig"
+    owner: "{{ username }}"
+    group: "{{ username }}"
 
 - name: enabling sudo for {{ username }}
   become: yes
@@ -65,7 +72,24 @@
     group: "{{ username }}"
     mode: 0755
     state: directory
-  
+
+- name: copy qutebrowser config
+  become: yes
+  copy:
+    src: config/qutebrowser/
+    dest: "/home/{{ username }}/.config/qutebrowser/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+ 
+- name: copy mpv config
+  become: yes
+  copy:
+    src: config/mpv/
+    dest: "/home/{{ username }}/.config/mpv/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+ 
+
 - name: copy picom config
   become: yes
   copy:
