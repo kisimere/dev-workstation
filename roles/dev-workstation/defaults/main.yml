@@ -67,6 +67,7 @@ internet_package:
   - python3-adblock
   - neomutt
   - yt-dlp
+  - wavemon
 
 locals_and_font_package:
   - noto-fonts-cjk
